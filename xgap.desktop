@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=XGAP
+GenericName=Computational discrete algebra
+Comment=Graphical GAP frontend
+Exec=xgap %f
+Icon=gap
+Terminal=false
+Type=Application
+Categories=Education;Science;Math;
+MimeType=application/x-gap;
