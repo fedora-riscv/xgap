@@ -1,220 +1,14 @@
---- ./src.x11/gapgraph.c.orig	1969-12-31 17:00:00.000000000 -0700
-+++ ./src.x11/gapgraph.c	2012-01-21 15:09:07.449650271 -0700
-@@ -127,6 +127,7 @@
- }
- 
- 
-+#if 0
- /****************************************************************************
- **
- *F  GapGraphResize( <w> ) . . . . . . . . . . . . . .  ignore resize requests
-@@ -139,6 +140,7 @@
-     gap->core.width  = gap->gap_graphic.width;
-     gap->core.height = gap->gap_graphic.height;
- }
-+#endif
- 
- 
- /****************************************************************************
---- ./src.x11/xgap.c.orig	1969-12-31 17:00:00.000000000 -0700
-+++ ./src.x11/xgap.c	2012-01-21 15:09:07.450650250 -0700
-@@ -279,9 +279,9 @@
-     paste = !paste;
-     GTDropGapPrompt( GapTalk, !paste );
-     if ( paste )
--	XtVaSetValues( item->entry, XtNrightBitmap, CheckMarkSymbol, 0 );
-+	XtVaSetValues( item->entry, XtNrightBitmap, CheckMarkSymbol, NULL );
-     else
--	XtVaSetValues( item->entry, XtNrightBitmap, EmptyMarkSymbol, 0 );
-+	XtVaSetValues( item->entry, XtNrightBitmap, EmptyMarkSymbol, NULL );
- }
- 
- static void MenuQuitGapCTRD ( item )
-@@ -289,9 +289,9 @@
- {
-     QuitGapCtrlD = !QuitGapCtrlD;
-     if ( QuitGapCtrlD )
--	XtVaSetValues( item->entry, XtNrightBitmap, CheckMarkSymbol, 0 );
-+	XtVaSetValues( item->entry, XtNrightBitmap, CheckMarkSymbol, NULL );
-     else
--	XtVaSetValues( item->entry, XtNrightBitmap, EmptyMarkSymbol, 0 );
-+	XtVaSetValues( item->entry, XtNrightBitmap, EmptyMarkSymbol, NULL );
- }
- 
- #ifndef NO_FILE_SELECTOR
-@@ -441,30 +441,30 @@
- 			       items->label, smeBSBObjectClass, menu,
- 			       XtNrightMargin, 14,
-                                XtNrightBitmap, EmptyMarkSymbol,
--			       0 );
-+			       NULL );
- 	    XtAddCallback( items->entry, XtNcallback,
- 			   (XtCallbackProc)MenuSelected, items );
- 	    switch ( items->sensitive )
- 	    {
- 		case S_INPUT_ONLY:
- 		    AddList( ListInputOnly, items->entry );
--		    XtVaSetValues( items->entry, XtNsensitive, False, 0 );
-+		    XtVaSetValues( items->entry, XtNsensitive, False, NULL );
- 		    break;
- 		case S_ERROR_ONLY:
- 		    AddList( ListErrorOnly, items->entry );
--		    XtVaSetValues( items->entry, XtNsensitive, False, 0 );
-+		    XtVaSetValues( items->entry, XtNsensitive, False, NULL );
- 		    break;
- 		case S_NORMAL_ONLY:
- 		    AddList( ListNormalOnly, items->entry );
--		    XtVaSetValues( items->entry, XtNsensitive, False, 0 );
-+		    XtVaSetValues( items->entry, XtNsensitive, False, NULL );
- 		    break;
- 		case S_RUNNING_ONLY:
- 		    AddList( ListRunningOnly, items->entry );
--		    XtVaSetValues( items->entry, XtNsensitive, False, 0 );
-+		    XtVaSetValues( items->entry, XtNsensitive, False, NULL );
- 		    break;
- 		case S_HELP_ONLY:
- 		    AddList( ListHelpOnly, items->entry );
--		    XtVaSetValues( items->entry, XtNsensitive, False, 0 );
-+		    XtVaSetValues( items->entry, XtNsensitive, False, NULL );
- 		    break;
- 		case S_ALWAYS:
- 		    break;
-@@ -504,9 +504,9 @@
-     for ( i = 0;  i < l->len;  i++ )
-     {
- 	if ( state == GAP_ERROR )
--	    XtVaSetValues( (Widget)l->ptr[i], XtNsensitive, True, 0 );
-+	    XtVaSetValues( (Widget)l->ptr[i], XtNsensitive, True, NULL );
- 	else
--	    XtVaSetValues( (Widget)l->ptr[i], XtNsensitive, False, 0 );
-+	    XtVaSetValues( (Widget)l->ptr[i], XtNsensitive, False, NULL );
-     }
- 
-     /* menu entry active only during input */
-@@ -514,9 +514,9 @@
-     for ( i = 0;  i < l->len;  i++ )
-     {
- 	if ( state == GAP_ERROR || state == GAP_INPUT )
--	    XtVaSetValues( (Widget)l->ptr[i], XtNsensitive, True, 0 );
-+	    XtVaSetValues( (Widget)l->ptr[i], XtNsensitive, True, NULL );
- 	else
--	    XtVaSetValues( (Widget)l->ptr[i], XtNsensitive, False, 0 );
-+	    XtVaSetValues( (Widget)l->ptr[i], XtNsensitive, False, NULL );
-     }
- 
-     /* menu entry active only during normal input */
-@@ -524,9 +524,9 @@
-     for ( i = 0;  i < l->len;  i++ )
-     {
- 	if ( state == GAP_INPUT )
--	    XtVaSetValues( (Widget)l->ptr[i], XtNsensitive, True, 0 );
-+	    XtVaSetValues( (Widget)l->ptr[i], XtNsensitive, True, NULL );
- 	else
--	    XtVaSetValues( (Widget)l->ptr[i], XtNsensitive, False, 0 );
-+	    XtVaSetValues( (Widget)l->ptr[i], XtNsensitive, False, NULL );
-     }
- 
-     /* menu entry active only while gap is running */
-@@ -534,9 +534,9 @@
-     for ( i = 0;  i < l->len;  i++ )
-     {
- 	if ( state == GAP_RUNNING )
--	    XtVaSetValues( (Widget)l->ptr[i], XtNsensitive, True, 0 );
-+	    XtVaSetValues( (Widget)l->ptr[i], XtNsensitive, True, NULL );
- 	else
--	    XtVaSetValues( (Widget)l->ptr[i], XtNsensitive, False, 0 );
-+	    XtVaSetValues( (Widget)l->ptr[i], XtNsensitive, False, NULL );
-     }
- 
-     /* menu entry active only while gap is helping */
-@@ -544,9 +544,9 @@
-     for ( i = 0;  i < l->len;  i++ )
-     {
- 	if ( state == GAP_HELP )
--	    XtVaSetValues( (Widget)l->ptr[i], XtNsensitive, True, 0 );
-+	    XtVaSetValues( (Widget)l->ptr[i], XtNsensitive, True, NULL );
- 	else
--	    XtVaSetValues( (Widget)l->ptr[i], XtNsensitive, False, 0 );
-+	    XtVaSetValues( (Widget)l->ptr[i], XtNsensitive, False, NULL );
-     }
- }
- 
-@@ -615,8 +615,8 @@
-     {
- 	
- 	/* compute a sensible size */
--	XtVaGetValues( talk, XtNtextSink, &snk,  0 );
--	XtVaGetValues( snk,  XtNfont,     &font, 0 );
-+	XtVaGetValues( talk, XtNtextSink, &snk,  NULL );
-+	XtVaGetValues( snk,  XtNfont,     &font, NULL );
- 	w = evt->xconfigure.width / font->max_bounds.width - 3;
- 	h = evt->xconfigure.height / ( font->max_bounds.ascent
- 	    + font->max_bounds.descent ) - 2;
-@@ -702,7 +702,7 @@
- 	         box,
- 		 XtNleftBitmap,     symbol,
- 		 XtNx,              10,
--		 0 );
-+		 NULL );
-     CreateMenu( button, RunMenu );
- 
-     /* create help menu button and help menu */
-@@ -710,7 +710,7 @@
- 	         box,
- 		 XtNleftBitmap,     symbol,
- 		 XtNx,              10,
--		 0 );
-+		 NULL );
-     CreateMenu( button, HelpMenu );
- 
-     /* create the communication window */
-@@ -730,7 +730,7 @@
-     GTDropGapPrompt( GapTalk, True );
- 
-     /* to quit or not do quit on CTR-D */
--    XtVaGetValues( GapTalk, XtNquitGapCtrD, &flag,  0 );
-+    XtVaGetValues( GapTalk, XtNquitGapCtrD, &flag,  NULL );
-     if ( flag )
-     {
- 	for ( i = 0;  GapMenu[i].label;  i++ )
-@@ -741,7 +741,7 @@
-     }
- 
-     /* paste GAP prompt into talk window? */
--    XtVaGetValues( GapTalk, XtNpasteGapPrompt, &flag,  0 );
-+    XtVaGetValues( GapTalk, XtNpasteGapPrompt, &flag,  NULL );
-     if ( flag )
-     {
- 	for ( i = 0;  GapMenu[i].label;  i++ )
-@@ -1077,7 +1077,7 @@
-     /* create a new top level shell and an applictation context */
-     XGap = XtVaAppInitialize( &AppContext, "XGap",
- 			      CommandOptions, XtNumber(CommandOptions),
--			      &i, argv, FallbackResources, 0 );
-+			      &i, argv, FallbackResources, NULL );
-     for ( j = len;  j <= argc;  j++ ) {
- 	argv[i+(j-len)] = argv[j];
-     }
-@@ -1155,7 +1155,7 @@
-     InitXCMDS();
- 
-     /* get color model */
--    XtVaGetValues( GapTalk, XtNcolorModel, &color, 0 );
-+    XtVaGetValues( GapTalk, XtNcolorModel, &color, NULL );
-     len = strlen(color);
-     if ( !strncmp( color, "black&white", len ) )
- 	mod = CM_BW;
-@@ -1179,7 +1179,7 @@
- 	mod = -1;
-     }
-     if ( mod != -1 ) {
--	XtVaGetValues( GapTalk, XtNcolors, &colors, 0 );
-+	XtVaGetValues( GapTalk, XtNcolors, &colors, NULL );
- 	GCSetColorModel( GapDisplay, mod, colors );
-     }
- 
---- ./src.x11/bitmaps/emptymk.bm.orig	1969-12-31 17:00:00.000000000 -0700
-+++ ./src.x11/bitmaps/emptymk.bm	2012-01-21 15:09:31.063159570 -0700
+--- ./src.x11/bitmaps/menusym.bm.orig	2012-04-20 16:00:14.000000000 -0600
++++ ./src.x11/bitmaps/menusym.bm	2012-04-23 11:24:45.331362194 -0600
+@@ -1,5 +1,5 @@
+ #define menusym_width 12
+ #define menusym_height 12
+-static unsigned char menusym_bits[] = {
++static const char menusym_bits[] = {
+    0xfe, 0x03, 0x02, 0x02, 0x02, 0x06, 0x72, 0x06, 0x02, 0x06, 0x72, 0x06,
+    0x02, 0x06, 0x72, 0x06, 0x02, 0x06, 0x02, 0x06, 0xfe, 0x07, 0xf8, 0x07};
+--- ./src.x11/bitmaps/emptymk.bm.orig	2012-04-20 16:00:14.000000000 -0600
++++ ./src.x11/bitmaps/emptymk.bm	2012-04-23 11:24:21.019383597 -0600
 @@ -1,5 +1,5 @@
  #define emptymk_width 12
  #define emptymk_height 12
@@ -222,8 +16,8 @@
 +static const char emptymk_bits[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
---- ./src.x11/bitmaps/exmark.bm.orig	1969-12-31 17:00:00.000000000 -0700
-+++ ./src.x11/bitmaps/exmark.bm	2012-01-21 15:09:42.487922170 -0700
+--- ./src.x11/bitmaps/exmark.bm.orig	2012-04-20 16:00:14.000000000 -0600
++++ ./src.x11/bitmaps/exmark.bm	2012-04-23 11:24:30.299375426 -0600
 @@ -1,6 +1,6 @@
  #define exmark_width 32
  #define exmark_height 32
@@ -232,8 +26,8 @@
     0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0xc0, 0x01, 0x00,
     0x00, 0x60, 0x03, 0x00, 0x00, 0x60, 0x03, 0x00, 0x00, 0x30, 0x06, 0x00,
     0x00, 0x30, 0x06, 0x00, 0x00, 0x18, 0x0c, 0x00, 0x00, 0x18, 0x0c, 0x00,
---- ./src.x11/bitmaps/checksym.bm.orig	1969-12-31 17:00:00.000000000 -0700
-+++ ./src.x11/bitmaps/checksym.bm	2012-01-21 15:09:21.431359797 -0700
+--- ./src.x11/bitmaps/checksym.bm.orig	2012-04-20 16:00:14.000000000 -0600
++++ ./src.x11/bitmaps/checksym.bm	2012-04-23 11:24:11.531391948 -0600
 @@ -1,5 +1,5 @@
  #define checksym_width 12
  #define checksym_height 12
@@ -241,17 +35,8 @@
 +static const char checksym_bits[] = {
     0x00, 0x00, 0x00, 0x04, 0x00, 0x06, 0x00, 0x03, 0x80, 0x01, 0xc0, 0x00,
     0x62, 0x00, 0x36, 0x00, 0x1c, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00};
---- ./src.x11/bitmaps/menusym.bm.orig	1969-12-31 17:00:00.000000000 -0700
-+++ ./src.x11/bitmaps/menusym.bm	2012-01-21 15:09:55.920643035 -0700
-@@ -1,5 +1,5 @@
- #define menusym_width 12
- #define menusym_height 12
--static unsigned char menusym_bits[] = {
-+static const char menusym_bits[] = {
-    0xfe, 0x03, 0x02, 0x02, 0x02, 0x06, 0x72, 0x06, 0x02, 0x06, 0x72, 0x06,
-    0x02, 0x06, 0x72, 0x06, 0x02, 0x06, 0x02, 0x06, 0xfe, 0x07, 0xf8, 0x07};
---- ./src.x11/bitmaps/return.bm.orig	1969-12-31 17:00:00.000000000 -0700
-+++ ./src.x11/bitmaps/return.bm	2012-01-21 15:10:08.448382706 -0700
+--- ./src.x11/bitmaps/return.bm.orig	2012-04-20 16:00:14.000000000 -0600
++++ ./src.x11/bitmaps/return.bm	2012-04-23 11:24:55.507353236 -0600
 @@ -1,5 +1,5 @@
  #define return_width 9
  #define return_height 7
@@ -259,9 +44,48 @@
 +static const char return_bits[] = {
     0x00, 0x00, 0x44, 0x00, 0x42, 0x00, 0x7d, 0x00, 0x02, 0x00, 0x04, 0x00,
     0x00, 0x00};
---- ./src.x11/gaptext.c.orig	1969-12-31 17:00:00.000000000 -0700
-+++ ./src.x11/gaptext.c	2012-01-21 15:09:07.451650229 -0700
-@@ -860,6 +860,9 @@
+--- ./src.x11/pty.c.orig	2012-04-20 16:00:14.000000000 -0600
++++ ./src.x11/pty.c	2012-04-23 11:29:32.250835491 -0600
+@@ -31,6 +31,7 @@
+ **    'x'              		the current input line is empty
+ **    'z' 			start of 'Exec'
+ */
++#define     _GNU_SOURCE
+ #include    "utils.h"
+ 
+ #include    "gaptext.h"
+@@ -1345,7 +1346,7 @@ int StartGapProcess ( name, argv )
+     String          argv[];
+ {
+     Int             j;       /* loop variables                  */
+-    char            c[8];    /* buffer for communication        */
++    char            c[10];   /* buffer for communication        */
+     int             master;  /* pipe to GAP                     */
+     int             n;       /* return value of 'select'        */
+     int             slave;   /* pipe from GAP                   */
+--- ./src.x11/xcmds.c.orig	2012-04-20 16:00:14.000000000 -0600
++++ ./src.x11/xcmds.c	2012-04-23 11:27:59.963190854 -0600
+@@ -1936,6 +1936,8 @@ static Boolean FunDrawText (
+ 
+ *F  FunPlaybackFile( <filename> ) . . . . . . . . .  playback file <filename>
+ */
++extern int PlaybackFile(String);
++
+ static Boolean FunPlaybackFile (
+     TypeArg               * arg )
+ {
+@@ -1949,6 +1951,8 @@ static Boolean FunPlaybackFile (
+ **
+ *F  FunResumePlayback() . . . . . . . . . . . . . . . resume playback of file
+ */
++extern int ResumePlayback(void);
++
+ static Boolean FunResumePlayback (
+     TypeArg               * arg )
+ {
+--- ./src.x11/gaptext.c.orig	2012-04-20 16:00:14.000000000 -0600
++++ ./src.x11/gaptext.c	2012-04-23 11:26:14.371283810 -0600
+@@ -860,6 +860,9 @@ static XawTextPosition GapSrcScan (
  	case XawstPositions: 
  	    pos += cnt * inc;
  	    break;
@@ -271,607 +95,21 @@
      }
      if ( dir == XawsdLeft )
  	pos++;
---- ./src.x11/xcmds.c.orig	1969-12-31 17:00:00.000000000 -0700
-+++ ./src.x11/xcmds.c	2012-01-21 15:09:07.452650208 -0700
-@@ -546,12 +546,12 @@
- 
-     /* create a "paned" for the menu and text window */
-     paned = XtVaCreateManagedWidget(
--	        "textSelector", panedWidgetClass, selector->top, 0 );
-+	        "textSelector", panedWidgetClass, selector->top, NULL );
- 
-     /* create a headline */
-     XtVaCreateManagedWidget(
-         "textSelectorTitle", labelWidgetClass, paned,
--        XtNlabel, name, 0 );
-+        XtNlabel, name, NULL );
- 				    
- 
-     /* create a viewport for the text selectors */
-@@ -561,7 +561,7 @@
- 		   XtNallowVert,        True,
- 		   XtNuseBottom,        True,
- 		   XtNshowGrip,         False,
--		   0 );
-+		   NULL );
- 
-     /* compute number of entries */
-     for ( i = 2, qtr = arg->sargs[1];  *qtr;  qtr++ )
-@@ -598,7 +598,7 @@
- 			 XtNlist,           selector->text,
- 			 XtNdefaultColumns, 1,
- 			 XtNforceColumns,   True,
--			 0 );
-+			 NULL );
-     XtOverrideTranslations( selector->list, 
- 			    XtParseTranslationTable(ButtonPressTrans) );
-     XtAddCallback( selector->list, XtNcallback, TextSelected,
-@@ -611,7 +611,7 @@
-        	      XtNshowGrip,              False,
- 	      XtNskipAdjust,            True,
- 	      XtNresizeToPreferred, 	True,
--	      0 );
-+	      NULL );
- 
-     /* parse buttons */
-     selector->buttons = List(0);
-@@ -627,7 +627,7 @@
- 	             "textSelectorButton", commandWidgetClass, box,
- 	             XtNlabel,      buf,
- 	             XtNshapeStyle, XmuShapeOval,
--	             0 );
-+	             NULL );
- 	XtAddCallback(button,XtNcallback,ButtonSelected,
- 		      (XtPointer)((i+n*256)&0xffffL));
- 	AddList( selector->buttons, button );
-@@ -748,9 +748,9 @@
- 
-     /* enable/disable */
-     if ( arg->iargs[2] )
--	XtVaSetValues( entry, XtNsensitive, True, 0 );
-+	XtVaSetValues( entry, XtNsensitive, True, NULL );
-     else
--	XtVaSetValues( entry, XtNsensitive, False, 0 );
-+	XtVaSetValues( entry, XtNsensitive, False, NULL );
- 
-     /* return OK */
-     return AnswerGap( "o", 0, 0, 0, 0 );
-@@ -838,7 +838,7 @@
- 
-     /* create a shell */
-     pshell = XtVaCreatePopupShell( "pshell", simpleMenuWidgetClass,
--    	    	    	    	   XGap, XtNcursor, CursorTL, 0 );
-+    	    	    	    	   XGap, XtNcursor, CursorTL, NULL );
-     XtOverrideTranslations( pshell, 
- 			    XtParseTranslationTable(PopingDownTrans) );
- 
-@@ -847,8 +847,8 @@
-     XtVaCreateManagedWidget( "menulabel", smeBSBObjectClass, pshell,
-     	    	    	     XtNsensitive, False,
-     	    	    	     XtNlabel,     arg->sargs[0],
--    	    	    	     0 );
--    XtVaCreateManagedWidget( "line", smeLineObjectClass, pshell, 0 );
-+    	    	    	     NULL );
-+    XtVaCreateManagedWidget( "line", smeLineObjectClass, pshell, NULL );
- 
-     /* add popdown callback */
-     XtAddCallback( pshell, XtNpopdownCallback, PopingDown, 0 );
-@@ -870,7 +870,7 @@
-     	if ( *ptr )  ptr++;
-     	DEBUG( D_XCMD, ( "  entry = \"%s\"\n", buf ) );
-     	pane = XtVaCreateManagedWidget( "menupane", smeBSBObjectClass,
--    	    	    	    	    	pshell, XtNlabel, buf, 0 );
-+    	    	    	    	    	pshell, XtNlabel, buf, NULL );
-     	pd = (TypePaneData*) XtMalloc( sizeof(TypePaneData) );
-     	pd->pane   = i;
-     	pd->popup  = LEN(PopupMenus);
-@@ -910,7 +910,7 @@
-                    XtNwidth,       &w1,
-                    XtNheight,      &h1,
-                    XtNborderWidth, &bw,
--                   0,              0 );
-+                   0,              NULL );
- 
-     /* compute screen position */
-     XQueryPointer( GapDisplay, MyRootWindow,
-@@ -923,7 +923,7 @@
- 	y = tmp-h1;
- 
-     /* popup the popup shell */
--    XtVaSetValues( popup, XtNx, x-10, XtNy, y-10, 0 );
-+    XtVaSetValues( popup, XtNx, x-10, XtNy, y-10, NULL );
-     XawSimpleMenuClearActiveEntry( popup );
-     XtPopupSpringLoaded( popup );
-     XtGrabPointer( popup, True, ButtonPressMask|ButtonReleaseMask,
-@@ -1127,7 +1127,7 @@
- 		       XtNlabel,             "GAP window",
-  		       XtNskipAdjust,        True,
- 		       XtNshowGrip,          False,
--		       0 );
-+		       NULL );
+--- ./src.x11/gapgraph.c.orig	2012-04-20 16:00:14.000000000 -0600
++++ ./src.x11/gapgraph.c	2012-04-23 11:23:12.371444028 -0600
+@@ -127,6 +127,7 @@ static void GapGraphDestroy ( w )
  }
  
  
-@@ -1161,17 +1161,17 @@
-     window->text       = 0;
- 
-     /* find title position */
--    XtVaGetValues( GapTalk, XtNtitlePosition, &title, 0 );
-+    XtVaGetValues( GapTalk, XtNtitlePosition, &title, NULL );
- 
-     /* create a new top level shell */
-     window->top = XtVaAppCreateShell(
- 		      "XGap", "GraphicSheet",
- 		      topLevelShellWidgetClass, GapDisplay,
--		      0 );
-+		      NULL );
- 
-     /* create a "paned" for the menu and text window */
-     paned = XtVaCreateManagedWidget(
--	        "xgapWindow", panedWidgetClass, window->top, 0 );
-+	        "xgapWindow", panedWidgetClass, window->top, NULL );
- 
-     /* add TOP tile */
-     if ( *title == 'T' || *title == 't' )
-@@ -1183,11 +1183,11 @@
-  		      XtNskipAdjust,   		True,
- 		      XtNresizeToPreferred, 	True,
- 		      XtNshowGrip,     		False,
--		      0 );
-+		      NULL );
- 
-     /* create a dummy menu button */
-     button = XtVaCreateManagedWidget( "dummy", commandWidgetClass,
--				      window->box, XtNx, 0, 0 );
-+				      window->box, XtNx, 0, NULL );
- 
-     /* add MIDDLE tile */
-     if ( *title == 'M' || *title == 'm' )
-@@ -1202,7 +1202,7 @@
- 			  XtNuseBottom,        True,
- 			  XtNshowGrip,         False,
-                           XtNresizable,        True,
--			  0 );
-+			  NULL );
- 
-     /* create a drawable */
-     window->draw = XtVaCreateManagedWidget(
-@@ -1210,15 +1210,15 @@
- 		       gapGraphicWidgetClass, window->viewport,
-                        XtNwidth,              w,
- 	               XtNheight,             h,
--		       0 );
-+		       NULL );
-     window->width  = w;
-     window->height = h;
- 
-     /* fix dimensions of viewport */
--    XtVaGetValues( window->viewport, XtNwidth, &w1, XtNheight, &h1, 0 );
-+    XtVaGetValues( window->viewport, XtNwidth, &w1, XtNheight, &h1, NULL );
-     w1 = ( w1 < w ) ? w1 : w;
-     h1 = ( h1 < h ) ? h1 : h;
--    XtVaSetValues( window->viewport, XtNwidth, w1, XtNheight, h1, 0 );
-+    XtVaSetValues( window->viewport, XtNwidth, w1, XtNheight, h1, NULL );
- 
-     /* add BOTTOM tile */
-     if ( window->text == 0 )
-@@ -1240,7 +1240,7 @@
- 
-     /* remove dummy button and dummy text */
-     XtDestroyWidget(button);
--    XtVaSetValues( window->text, XtNlabel, name, 0 );
-+    XtVaSetValues( window->text, XtNlabel, name, NULL );
- 
-     /* define cursor */
-     XDefineCursor( GapDisplay, XtWindow(window->top), SleepCursor );
-@@ -1275,7 +1275,7 @@
- static Boolean FunAddTitle (
-     TypeArg   * arg )
- {
--    XtVaSetValues( arg->win->text, XtNlabel, arg->sargs[0], 0 );
-+    XtVaSetValues( arg->win->text, XtNlabel, arg->sargs[0], NULL );
-     return ANSWER_GAP( "o", 0, 0, 0, 0 );
- }
- 
-@@ -1397,7 +1397,7 @@
- 		       gapGraphicWidgetClass, (Widget)viewport,
-                        XtNwidth,              arg->win->width,
- 	               XtNheight,             arg->win->height,
--		       0 );
-+		       NULL );
-     XtUnmanageChild(dummy);
-     XtManageChild(arg->win->draw);
-     XtDestroyWidget(dummy);
-@@ -1454,11 +1454,11 @@
- 				      XtNlabel,      arg->sargs[0],
- 				      XtNshapeStyle, XmuShapeOval,
- 				      XtNleftBitmap, MenuSymbol,
--				      0 );
-+				      NULL );
- 
-     /* create a shell */
-     pshell = XtVaCreatePopupShell( "menu", simpleMenuWidgetClass,
--    	    	    	    	   button, XtNcursor, CursorTL, 0 );
-+    	    	    	    	   button, XtNcursor, CursorTL, NULL );
- 
-     /* create menu entries */
-     menu = (TypeMenu*) XtMalloc( sizeof(TypeMenu) );
-@@ -1474,7 +1474,7 @@
-     	if ( *ptr )  ptr++;
-     	DEBUG( D_XCMD, ( "  entry = \"%s\"\n", buf ) );
- 	if ( *buf == '-' )
--	    XtVaCreateManagedWidget( "line", smeLineObjectClass, pshell, 0 );
-+	    XtVaCreateManagedWidget( "line", smeLineObjectClass, pshell, NULL );
- 	else
- 	{
- 	    pane = XtVaCreateManagedWidget( buf, smeBSBObjectClass,
-@@ -1482,7 +1482,7 @@
- 					    XtNlabel,       buf,
- 					    XtNrightMargin, 14,
-                                             XtNrightBitmap, EmptyMarkSymbol,
--	                                    0 );
-+	                                    NULL );
- 	    pd = (TypeMenuData*) XtMalloc( sizeof(TypeMenuData) );
- 	    pd->window = arg->iargs[0];
- 	    pd->pane   = i;
-@@ -1561,9 +1561,9 @@
- 
-     /* set or clear check mark */
-     if ( arg->iargs[3] )
--	XtVaSetValues( entry, XtNrightBitmap, CheckMarkSymbol, 0 );
-+	XtVaSetValues( entry, XtNrightBitmap, CheckMarkSymbol, NULL );
-     else
--	XtVaSetValues( entry, XtNrightBitmap, EmptyMarkSymbol, 0 );
-+	XtVaSetValues( entry, XtNrightBitmap, EmptyMarkSymbol, NULL );
-     return ANSWER_GAP( "o", 0, 0, 0, 0 );
- }
- 
-@@ -1596,9 +1596,9 @@
- 
-     /* set or clear check mark */
-     if ( arg->iargs[3] )
--	XtVaSetValues( entry, XtNsensitive, True, 0 );
-+	XtVaSetValues( entry, XtNsensitive, True, NULL );
-     else
--	XtVaSetValues( entry, XtNsensitive, False, 0 );
-+	XtVaSetValues( entry, XtNsensitive, False, NULL );
-     return ANSWER_GAP( "o", 0, 0, 0, 0 );
- }
- 
-@@ -1923,6 +1923,8 @@
- 
- *F  FunPlaybackFile( <filename> ) . . . . . . . . .  playback file <filename>
- */
-+extern int PlaybackFile(String);
-+
- static Boolean FunPlaybackFile (
-     TypeArg               * arg )
- {
-@@ -1936,6 +1938,8 @@
++#if 0
+ /****************************************************************************
  **
- *F  FunResumePlayback() . . . . . . . . . . . . . . . resume playback of file
- */
-+extern int ResumePlayback(void);
-+
- static Boolean FunResumePlayback (
-     TypeArg               * arg )
- {
-@@ -2020,7 +2024,7 @@
- 		   XtNnormalFont,   &NormalFont,
- 		   XtNlargeFont,    &LargeFont,
-                    XtNhugeFont,     &HugeFont,
--		   0 );
-+		   NULL );
- 
-     /* create lists for windows, popups, and selectors */
-     GapWindows    = List(0);
---- ./src.x11/pty.c.orig	1969-12-31 17:00:00.000000000 -0700
-+++ ./src.x11/pty.c	2012-01-21 15:09:07.453650187 -0700
-@@ -31,6 +31,7 @@
- **    'x'              		the current input line is empty
- **    'z' 			start of 'Exec'
- */
-+#define     _GNU_SOURCE
- #include    "utils.h"
- 
- #include    "gaptext.h"
-@@ -456,7 +457,6 @@
- {
-     String          ptr;
-     String          free;
--    Char            ch;
-     Int             len;
-     static Boolean  inProgress = False;
- 
-@@ -1346,7 +1346,7 @@
-     String          argv[];
- {
-     Int             j;       /* loop variables                  */
--    char            c[8];    /* buffer for communication        */
-+    char            c[10];   /* buffer for communication        */
-     int             master;  /* pipe to GAP                     */
-     int             n;       /* return value of 'select'        */
-     int             slave;   /* pipe from GAP                   */
---- ./src.x11/selfile.c.orig	1969-12-31 17:00:00.000000000 -0700
-+++ ./src.x11/selfile.c	2012-01-21 15:09:07.454650166 -0700
-@@ -822,7 +822,7 @@
- 	int	save;
- 	int     n;
- 
--        n = (int) p;
-+        n = (int)(long) p;
- 
- 	dir = &(SFdirs[SFdirPtr + n]);
- 	save = dir->vOrigin;
-@@ -852,7 +852,7 @@
- 
- 	if (SFbuttonPressed) {
- 		SFscrollTimerId = XtAppAddTimeOut(SFapp,
--			SFscrollTimerInterval(), SFscrollTimer, (XtPointer) n);
-+			SFscrollTimerInterval(), SFscrollTimer, (XtPointer)(long) n);
- 	}
+ *F  GapGraphResize( <w> ) . . . . . . . . . . . . . .  ignore resize requests
+@@ -139,6 +140,7 @@ static void GapGraphResize ( w )
+     gap->core.width  = gap->gap_graphic.width;
+     gap->core.height = gap->gap_graphic.height;
  }
++#endif
  
-@@ -893,7 +893,7 @@
- 				SFscrollTimerAdded = 1;
- 				SFscrollTimerId = XtAppAddTimeOut(SFapp,
- 					SFscrollTimerInterval(), SFscrollTimer,
--					(XtPointer) n);
-+					(XtPointer)(long) n);
- 			}
- 		}
  
-@@ -2213,7 +2213,7 @@
- 	          "XGap",                    "FileSelector",
- 		  transientShellWidgetClass, SFdisplay,
- 		  XtNtransientFor,           toplevel,
--		  0 );
-+		  NULL );
- 
-     /* Add WM_DELETE_WINDOW protocol */
-     XtAppAddActions( XtWidgetToApplicationContext(selFile),
-@@ -2225,7 +2225,7 @@
-     selFileForm = XtVaCreateManagedWidget(
- 		      "selFileForm", formWidgetClass, selFile,
- 		      XtNdefaultDistance, 30,
--		      0);
-+		      NULL);
- 
-     selFilePrompt = XtVaCreateManagedWidget(
- 		      "selFilePrompt", labelWidgetClass, selFileForm,
-@@ -2236,11 +2236,11 @@
-                       XtNleft,            XtChainLeft,
-                       XtNright,           XtChainLeft,
-                       XtNborderWidth,     0,
--                      0 );
-+                      NULL );
-     XtVaGetValues( selFilePrompt,
- 		      XtNforeground,      &SFfore,
- 	              XtNbackground,      &SFback,
--		      0 );
-+		      NULL );
- 
-     /* initialize fonts */
-     SFinitFont();
-@@ -2306,7 +2306,7 @@
-                      XtNwrap,             XawtextWrapWord,
-                      XtNresize,           XawtextResizeHeight,
-                      XtNuseStringInPlace, True,
--		     0 );
-+		     NULL );
-     XtOverrideTranslations( selFileField,
-         XtParseTranslationTable(oneLineTextEditTranslations) );
-     XtSetKeyboardFocus(selFileForm, selFileField);
-@@ -2323,7 +2323,7 @@
-                      XtNbottom,            XtChainTop,
-                      XtNleft,              XtChainLeft,
-                      XtNright,             XtChainLeft,
--		     0 );
-+		     NULL );
-     XtAddCallback( selFileHScroll, XtNjumpProc,
- 		   SFpathSliderMovedCallback, (XtPointer) NULL);
-     XtAddCallback( selFileHScroll, XtNscrollProc,
-@@ -2340,7 +2340,7 @@
-                      XtNbottom,            XtChainTop,
-                      XtNleft,              XtChainLeft,
-                      XtNright,             XtChainLeft,
--		     0 );
-+		     NULL );
- 
-     selFileLists[1] = XtVaCreateManagedWidget(
- 		     "selFileList2", compositeWidgetClass, selFileForm,
-@@ -2355,7 +2355,7 @@
-                      XtNbottom,            XtChainTop,
-                      XtNleft,              XtChainLeft,
-                      XtNright,             XtChainLeft,
--		     0 );
-+		     NULL );
-     selFileLists[2] = XtVaCreateManagedWidget(
- 		     "selFileList3", compositeWidgetClass, selFileForm,
-                      XtNwidth,             listWidth,
-@@ -2369,7 +2369,7 @@
-                      XtNbottom,            XtChainTop,
-                      XtNleft,              XtChainLeft,
-                      XtNright,             XtChainLeft,
--		     0 );
-+		     NULL );
- 
-     for ( n = 0;  n < 3;  n++ )
-     {
-@@ -2380,11 +2380,11 @@
-                      XtNwidth,             scrollThickness,
-                      XtNheight,            SFvScrollHeight,
-                      XtNborderColor,       SFfore,
--		     0 );
-+		     NULL );
- 	XtAddCallback( selFileVScrolls[n], XtNjumpProc,
--		       SFvFloatSliderMovedCallback, (XtPointer) n );
-+		       SFvFloatSliderMovedCallback, (XtPointer)(long) n );
- 	XtAddCallback( selFileVScrolls[n], XtNscrollProc,
--			SFvAreaSelectedCallback, (XtPointer) n );
-+			SFvAreaSelectedCallback, (XtPointer)(long) n );
- 
- 	selFileHScrolls[n] = XtVaCreateManagedWidget(
- 		     "selFileHScroll", scrollbarWidgetClass, selFileLists[n],
-@@ -2394,11 +2394,11 @@
-                      XtNwidth,             SFhScrollWidth,
-                      XtNheight,            scrollThickness,
-                      XtNborderColor,       SFfore,
--                     0 );
-+                     NULL );
- 	XtAddCallback( selFileHScrolls[n], XtNjumpProc,
--		       SFhSliderMovedCallback, (XtPointer) n );
-+		       SFhSliderMovedCallback, (XtPointer)(long) n );
- 	XtAddCallback( selFileHScrolls[n], XtNscrollProc,
--		       SFhAreaSelectedCallback, (XtPointer) n );
-+		       SFhAreaSelectedCallback, (XtPointer)(long) n );
-     }
- 
-     selFileOK = XtVaCreateManagedWidget(
-@@ -2412,7 +2412,7 @@
-                      XtNbottom,            XtChainTop,
-                      XtNleft,              XtChainLeft,
-                      XtNright,             XtChainLeft,
--                     0 );
-+                     NULL );
-     selFileCancel = XtVaCreateManagedWidget(
- 		     "selFileCancel", commandWidgetClass, selFileForm,
-                      XtNresizable,         True,
-@@ -2426,7 +2426,7 @@
-                      XtNbottom,            XtChainTop,
-                      XtNleft,              XtChainLeft,
-                      XtNright,             XtChainLeft,
--                     0 );
-+                     NULL );
-     selFileHome = XtVaCreateManagedWidget(
- 		     "selFileHome", commandWidgetClass, selFileForm,
-                      XtNresizable,         True,
-@@ -2440,7 +2440,7 @@
-                      XtNbottom,            XtChainTop,
-                      XtNleft,              XtChainLeft,
-                      XtNright,             XtChainLeft,
--                     0 );
-+                     NULL );
- 
-     /* realise toplevel */
-     XtSetMappedWhenManaged( selFile, False );
-@@ -2471,17 +2471,17 @@
-     for ( n = 0;  n < 3;  n++ )
-     {
- 	XtAddEventHandler( selFileLists[n], ExposureMask, True,
--			   SFexposeList, (XtPointer) n );
-+			   SFexposeList, (XtPointer)(long) n );
- 	XtAddEventHandler( selFileLists[n], EnterWindowMask, False,
--			   SFenterList, (XtPointer) n );
-+			   SFenterList, (XtPointer)(long) n );
- 	XtAddEventHandler( selFileLists[n], LeaveWindowMask, False,
--			   SFleaveList, (XtPointer) n );
-+			   SFleaveList, (XtPointer)(long) n );
- 	XtAddEventHandler( selFileLists[n], PointerMotionMask, False,
--			   SFmotionList, (XtPointer) n );
-+			   SFmotionList, (XtPointer)(long) n );
- 	XtAddEventHandler( selFileLists[n], ButtonPressMask, False,
--			   SFbuttonPressList, (XtPointer) n );
-+			   SFbuttonPressList, (XtPointer)(long) n );
- 	XtAddEventHandler( selFileLists[n], ButtonReleaseMask, False,
-- 			   SFbuttonReleaseList, (XtPointer) n );
-+ 			   SFbuttonReleaseList, (XtPointer)(long) n );
-     }
-     XtAddEventHandler( selFileField, KeyPressMask, False,
- 		       SFmodVerifyCallback, (XtPointer) NULL);
---- ./src.x11/popdial.c.orig	1969-12-31 17:00:00.000000000 -0700
-+++ ./src.x11/popdial.c	2012-01-21 15:09:07.454650166 -0700
-@@ -82,7 +82,7 @@
-     String          name;
- 
-     /* find name in <buttons> and set result */
--    XtVaGetValues( w, XtNlabel, &name, 0, 0 );
-+    XtVaGetValues( w, XtNlabel, &name, 0, NULL );
-     for ( i = 0;  i < XtNumber(buttons);  i++ )
- 	if ( ! strcmp( buttons[i].name, name ) )
- 	    (*res) |= buttons[i].flag;
-@@ -127,24 +127,24 @@
-         dialog->popupShell = XtVaCreatePopupShell(
-                                  name, overrideShellWidgetClass,  top,
- 		                 XtNallowShellResize, True,
--			         0 );
-+			         NULL );
-     else
-         dialog->popupShell = XtVaCreatePopupShell(
- 	    		         name, transientShellWidgetClass, top,
- 			         XtNallowShellResize, True,
- 			         XtNtransientFor,     top,
--			         0 );
-+			         NULL );
-     if ( pix == 0 )
-         dialog->dialog = XtVaCreateManagedWidget(
-                              "xgapDialog",  dialogWidgetClass,
-                              dialog->popupShell,
--                             0, 0 );
-+                             0, NULL );
-     else
-         dialog->dialog = XtVaCreateManagedWidget(
-                              "xgapDialog",  dialogWidgetClass,
-                              dialog->popupShell,
-                              XtNicon, pix,
--                             0, 0 );
-+                             0, NULL );
-     dialog->button        = bt;
-     dialog->context       = app;
-     dialog->defaultButton = def;
-@@ -158,12 +158,12 @@
- 			    buttons[i].name, commandWidgetClass,
- 			    dialog->dialog, 
- 			    XtNleftBitmap, symbol,
--			    0, 0 );
-+			    0, NULL );
- 	    else
- 		dialog->buttons[i] = XtVaCreateManagedWidget(
- 			    buttons[i].name, commandWidgetClass,
- 			    dialog->dialog, 
--			    0, 0 );
-+			    0, NULL );
- 	    XtAddCallback( dialog->buttons[i],
- 			   XtNcallback,
- 			   ButtonSelected,
-@@ -229,11 +229,11 @@
-     XtVaSetValues( dialog->dialog,
- 		   XtNlabel, 	message,
- 		   XtNvalue,    deflt,
--		   0,           0 );
-+		   0,           NULL );
-     /* get size of popup dialog */
-     XtVaGetValues( dialog->popupShell,
- 		   XtNwidth,       &w1,
--		   0,              0 );
-+		   0,              NULL );
-     textlen = strlen(message)*NormalFont->max_bounds.width + 80;
-     deflen = strlen(deflt)*NormalFont->max_bounds.width + 60;
-     if (textlen > deflen) {
-@@ -247,7 +247,7 @@
-     }
-     XtVaSetValues( dialog->dialog,
-                    XtNwidth,textlen,
--                   0,0 );
-+                   0, NULL);
-     /* End of changes by Max. */
- 
-     XtRealizeWidget( dialog->popupShell );
-@@ -257,7 +257,7 @@
- 		   XtNwidth,       &w1,
- 		   XtNheight,      &h1,
- 		   XtNborderWidth, &bw,
--		   0,              0 );
-+		   0,              NULL );
- 
-     /* get position of the mouse pointer */
-     XQueryPointer( display, XtWindow(dialog->popupShell),
-@@ -277,7 +277,7 @@
-     XtVaSetValues( dialog->popupShell,
- 		   XtNx, x1,
- 		   XtNy, y1,
--		   0,    0 );
-+		   0,    NULL );
- 
-     /* pop up shell */
-     XtPopup( dialog->popupShell, XtGrabExclusive );
+ /****************************************************************************
