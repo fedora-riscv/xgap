@@ -11,6 +11,7 @@ Source1:        %{name}.desktop
 Patch0:         %{name}-warning.patch
 
 BuildRequires:  desktop-file-utils
+BuildRequires:  gap-devel
 BuildRequires:  libXaw-devel
 Requires:       gap-core
 
@@ -64,6 +65,7 @@ update-desktop-database %{_datadir}/applications &>/dev/null ||:
 %changelog
 * Mon Apr 23 2012 Jerry James <loganjerry@gmail.com> - 4.22-1
 - New upstream release
+- Add gap-devel BR to get _gap_dir and _gap_arch_dir macros
 
 * Wed Mar 28 2012 Jerry James <loganjerry@gmail.com> - 4.21-3
 - Fix binary permissions
