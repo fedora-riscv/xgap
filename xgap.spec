@@ -1,13 +1,17 @@
 Name:           xgap
-Version:        4.22
+Version:        4.23
 Release:        1%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
 URL:            http://www-groups.mcs.st-and.ac.uk/~neunhoef/Computer/Software/Gap/%{name}4.html
 Source0:        http://www-groups.mcs.st-and.ac.uk/~neunhoef/Computer/Software/Gap/%{name}4/%{name}-%{version}.tar.gz
+# Created by Jerry James <loganjerry@gmail.com>
 Source1:        %{name}.desktop
-# This patch quiets some compiler warnings.
+# Created by Paulo César Pereira de Andrade
+# <paulo.cesar.pereira.de.andrade@gmail.com>
+Source2:        XGap
+# Sent upstream 9 May 2012.  This patch quiets some compiler warnings.
 Patch0:         %{name}-warning.patch
 
 BuildRequires:  desktop-file-utils
@@ -21,6 +25,9 @@ A X Windows GUI for GAP.
 %prep
 %setup -q -n %{name}
 %patch0
+
+# Autoloading this package interferes with SAGE (bz 819705).
+sed -i "/^Autoload/s/true/false/" PackageInfo.g 
 
 %build
 export LDFLAGS="$RPM_LD_FLAGS -Wl,--as-needed"
@@ -36,6 +43,7 @@ cp -p bin/*/%{name} $RPM_BUILD_ROOT%{_bindir}/%{name}.bin
 
 # The xgap.sh generated during build contains paths in the build root
 sed -e "s|@gapdir@|%{_gap_dir}|" \
+    -e "s|^GAP_PRG=.*|GAP_PRG=%{_bindir}/gap|" \
     -e "s|^XGAP_PRG=.*|XGAP_PRG=%{_bindir}/%{name}.bin|" \
     -e "s|\$XGAP_DIR/pkg/%{name}/bin/||" \
     -e "s|\$GAP_DIR/bin/\$GAP_PRG|\$GAP_PRG|" \
@@ -46,6 +54,10 @@ chmod 0755 $RPM_BUILD_ROOT%{_bindir}/%{name}
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 desktop-file-install --mode=644 --dir=$RPM_BUILD_ROOT%{_datadir}/applications \
   %{SOURCE1}
+
+# Install the X resource file
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/X11/app-defaults
+cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/X11/app-defaults
 
 %posttrans -p %{_bindir}/update-gap-workspace
 
@@ -60,9 +72,17 @@ update-desktop-database %{_datadir}/applications &>/dev/null ||:
 %doc Changelog.*
 %{_bindir}/%{name}*
 %{_datadir}/applications/%{name}.desktop
+%{_datadir}/X11/app-defaults/XGap
 %{_gap_dir}/pkg/%{name}
 
 %changelog
+* Wed May  9 2012 Jerry James <loganjerry@gmail.com> - 4.23-1
+- New upstream release
+- Fix bz 819705 issues:
+- Fix xgap shell script
+- Install X11 resource file
+- Turn off autoloading, as that interferes with SAGE
+
 * Mon Apr 23 2012 Jerry James <loganjerry@gmail.com> - 4.22-1
 - New upstream release
 - Add gap-devel BR to get _gap_dir and _gap_arch_dir macros
