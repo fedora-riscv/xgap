@@ -1,6 +1,6 @@
 Name:           xgap
 Version:        4.23
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -76,6 +76,9 @@ update-desktop-database %{_datadir}/applications &>/dev/null ||:
 %{_gap_dir}/pkg/%{name}
 
 %changelog
+* Sun Jul 22 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 4.23-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
+
 * Wed May  9 2012 Jerry James <loganjerry@gmail.com> - 4.23-1
 - New upstream release
 - Fix bz 819705 issues:
