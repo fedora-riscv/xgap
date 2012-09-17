@@ -1,6 +1,6 @@
 Name:           xgap
 Version:        4.23
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -31,7 +31,7 @@ sed -i "/^Autoload/s/true/false/" PackageInfo.g
 
 %build
 export LDFLAGS="$RPM_LD_FLAGS -Wl,--as-needed"
-%configure --with-gaproot=%{_gap_arch_dir}
+%configure --with-gaproot=%{_gap_dir}
 make %{?_smp_mflags}
 
 %install
@@ -59,9 +59,8 @@ desktop-file-install --mode=644 --dir=$RPM_BUILD_ROOT%{_datadir}/applications \
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/X11/app-defaults
 cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/X11/app-defaults
 
-%posttrans -p %{_bindir}/update-gap-workspace
-
 %post
+%{_bindir}/update-gap-workspace
 update-desktop-database %{_datadir}/applications &>/dev/null ||:
 
 %postun
@@ -76,6 +75,9 @@ update-desktop-database %{_datadir}/applications &>/dev/null ||:
 %{_gap_dir}/pkg/%{name}
 
 %changelog
+* Mon Sep 17 2012 Jerry James <loganjerry@gmail.com> - 4.23-3
+- Rebuild for GAP 4.5
+
 * Sun Jul 22 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 4.23-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
 
