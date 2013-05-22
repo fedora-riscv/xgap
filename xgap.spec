@@ -1,6 +1,6 @@
 Name:           xgap
 Version:        4.23
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -30,6 +30,7 @@ A X Windows GUI for GAP.
 sed -i "/^Autoload/s/true/false/" PackageInfo.g 
 
 %build
+export CFLAGS="$RPM_OPT_FLAGS -D_FILE_OFFSET_BITS=64"
 export LDFLAGS="$RPM_LD_FLAGS -Wl,--as-needed"
 %configure --with-gaproot=%{_gap_dir}
 make %{?_smp_mflags}
@@ -75,6 +76,9 @@ update-desktop-database %{_datadir}/applications &>/dev/null ||:
 %{_gap_dir}/pkg/%{name}
 
 %changelog
+* Wed May 22 2013 Jerry James <loganjerry@gmail.com> - 4.23-5
+- Build with large file support
+
 * Fri Feb 15 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 4.23-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
 
