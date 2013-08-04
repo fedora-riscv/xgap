@@ -1,6 +1,6 @@
 Name:           xgap
 Version:        4.23
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -76,6 +76,9 @@ update-desktop-database %{_datadir}/applications &>/dev/null ||:
 %{_gap_dir}/pkg/%{name}
 
 %changelog
+* Sun Aug 04 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 4.23-6
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+
 * Wed May 22 2013 Jerry James <loganjerry@gmail.com> - 4.23-5
 - Build with large file support
 
