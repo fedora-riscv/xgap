@@ -1,6 +1,6 @@
 Name:           xgap
 Version:        4.23
-Release:        8%{?dist}
+Release:        9%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -36,11 +36,11 @@ export LDFLAGS="$RPM_LD_FLAGS -Wl,--as-needed"
 make %{?_smp_mflags}
 
 %install
-mkdir -p $RPM_BUILD_ROOT%{_gap_dir}/pkg/%{name}
-cp -a *.g README doc examples htm lib $RPM_BUILD_ROOT%{_gap_dir}/pkg/%{name}
+mkdir -p %{buildroot}%{_gap_dir}/pkg/%{name}
+cp -a *.g README doc examples htm lib %{buildroot}%{_gap_dir}/pkg/%{name}
 
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-cp -p bin/*/%{name} $RPM_BUILD_ROOT%{_bindir}/%{name}.bin
+mkdir -p %{buildroot}%{_bindir}
+cp -p bin/*/%{name} %{buildroot}%{_bindir}/%{name}.bin
 
 # The xgap.sh generated during build contains paths in the build root
 sed -e "s|@gapdir@|%{_gap_dir}|" \
@@ -48,34 +48,41 @@ sed -e "s|@gapdir@|%{_gap_dir}|" \
     -e "s|^XGAP_PRG=.*|XGAP_PRG=%{_bindir}/%{name}.bin|" \
     -e "s|\$XGAP_DIR/pkg/%{name}/bin/||" \
     -e "s|\$GAP_DIR/bin/\$GAP_PRG|\$GAP_PRG|" \
-    %{name}.shi > $RPM_BUILD_ROOT%{_bindir}/%{name}
-chmod 0755 $RPM_BUILD_ROOT%{_bindir}/%{name}
+    %{name}.shi > %{buildroot}%{_bindir}/%{name}
+chmod 0755 %{buildroot}%{_bindir}/%{name}
 
 # Install the desktop file
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
-desktop-file-install --mode=644 --dir=$RPM_BUILD_ROOT%{_datadir}/applications \
+mkdir -p %{buildroot}%{_datadir}/applications
+desktop-file-install --mode=644 --dir=%{buildroot}%{_datadir}/applications \
   %{SOURCE1}
 
 # Install the X resource file
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/X11/app-defaults
-cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/X11/app-defaults
+mkdir -p %{buildroot}%{_datadir}/X11/app-defaults
+cp -p %{SOURCE2} %{buildroot}%{_datadir}/X11/app-defaults
 
 %post
-%{_bindir}/update-gap-workspace
+%{_bindir}/update-gap-workspace &> /dev/null ||:
 update-desktop-database %{_datadir}/applications &>/dev/null ||:
 
 %postun
-%{_bindir}/update-gap-workspace
+%{_bindir}/update-gap-workspace &> /dev/null ||:
 update-desktop-database %{_datadir}/applications &>/dev/null ||:
 
 %files
 %doc Changelog.*
+%docdir %{_gap_dir}/pkg/%{name}/doc
+%docdir %{_gap_dir}/pkg/%{name}/examples
+%docdir %{_gap_dir}/pkg/%{name}/htm
 %{_bindir}/%{name}*
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/X11/app-defaults/XGap
-%{_gap_dir}/pkg/%{name}
+%{_gap_dir}/pkg/%{name}/
 
 %changelog
+* Sat Jan 24 2015 Jerry James <loganjerry@gmail.com> - 4.23-9
+- Silence scriptlets when uninstalling
+- Mark some content as documentation
+
 * Mon Aug 18 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 4.23-8
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
