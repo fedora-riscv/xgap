@@ -1,6 +1,6 @@
 Name:           xgap
 Version:        4.23
-Release:        9%{?dist}
+Release:        10%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -79,6 +79,9 @@ update-desktop-database %{_datadir}/applications &>/dev/null ||:
 %{_gap_dir}/pkg/%{name}/
 
 %changelog
+* Fri Jun 19 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 4.23-10
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Sat Jan 24 2015 Jerry James <loganjerry@gmail.com> - 4.23-9
 - Silence scriptlets when uninstalling
 - Mark some content as documentation
