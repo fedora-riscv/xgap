@@ -1,6 +1,6 @@
 Name:           xgap
 Version:        4.23
-Release:        10%{?dist}
+Release:        11%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -17,7 +17,13 @@ Patch0:         %{name}-warning.patch
 BuildRequires:  desktop-file-utils
 BuildRequires:  gap-devel
 BuildRequires:  libXaw-devel
+BuildRequires:  tex-tex
+BuildRequires:  tex(manfnt.tfm)
+BuildRequires:  tth
+
 Requires:       gap-core
+
+Provides:       gap-pkg-xgap = %{version}-%{release}
 
 %description
 A X Windows GUI for GAP.
@@ -29,15 +35,25 @@ A X Windows GUI for GAP.
 # Autoloading this package interferes with SAGE (bz 819705).
 sed -i "/^Autoload/s/true/false/" PackageInfo.g 
 
+# Fix link to main GAP bibliography file
+sed -i 's,doc/manual,&bib.xml,' doc/manual.tex
+
 %build
 export CFLAGS="$RPM_OPT_FLAGS -D_FILE_OFFSET_BITS=64"
 export LDFLAGS="$RPM_LD_FLAGS -Wl,--as-needed"
 %configure --with-gaproot=%{_gap_dir}
 make %{?_smp_mflags}
 
+# Link to main GAP documentation
+ln -s %{_gap_dir}/etc ../../etc
+ln -s %{_gap_dir}/doc ../../doc
+make -C doc manual
+rm -f ../../{doc,etc}
+
 %install
 mkdir -p %{buildroot}%{_gap_dir}/pkg/%{name}
 cp -a *.g README doc examples htm lib %{buildroot}%{_gap_dir}/pkg/%{name}
+rm -f %{buildroot}%{_gap_dir}/pkg/%{name}/doc/*.{bbl,ind,toc}
 
 mkdir -p %{buildroot}%{_bindir}
 cp -p bin/*/%{name} %{buildroot}%{_bindir}/%{name}.bin
@@ -61,11 +77,9 @@ mkdir -p %{buildroot}%{_datadir}/X11/app-defaults
 cp -p %{SOURCE2} %{buildroot}%{_datadir}/X11/app-defaults
 
 %post
-%{_bindir}/update-gap-workspace &> /dev/null ||:
 update-desktop-database %{_datadir}/applications &>/dev/null ||:
 
 %postun
-%{_bindir}/update-gap-workspace &> /dev/null ||:
 update-desktop-database %{_datadir}/applications &>/dev/null ||:
 
 %files
@@ -79,6 +93,10 @@ update-desktop-database %{_datadir}/applications &>/dev/null ||:
 %{_gap_dir}/pkg/%{name}/
 
 %changelog
+* Wed Nov 11 2015 Jerry James <loganjerry@gmail.com> - 4.23-11
+- Simplify scriptlets; gap-core now uses rpm file triggers
+- Rebuild documentation from source
+
 * Fri Jun 19 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 4.23-10
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
