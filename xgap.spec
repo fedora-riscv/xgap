@@ -1,6 +1,6 @@
 Name:           xgap
 Version:        4.23
-Release:        11%{?dist}
+Release:        12%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -93,6 +93,9 @@ update-desktop-database %{_datadir}/applications &>/dev/null ||:
 %{_gap_dir}/pkg/%{name}/
 
 %changelog
+* Fri Feb 05 2016 Fedora Release Engineering <releng@fedoraproject.org> - 4.23-12
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
 * Wed Nov 11 2015 Jerry James <loganjerry@gmail.com> - 4.23-11
 - Simplify scriptlets; gap-core now uses rpm file triggers
 - Rebuild documentation from source
