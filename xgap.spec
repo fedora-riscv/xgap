@@ -1,6 +1,6 @@
 Name:           xgap
 Version:        4.23
-Release:        12%{?dist}
+Release:        13%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -16,8 +16,8 @@ Patch0:         %{name}-warning.patch
 
 BuildRequires:  desktop-file-utils
 BuildRequires:  gap-devel
+BuildRequires:  gcc
 BuildRequires:  libXaw-devel
-BuildRequires:  tex-tex
 BuildRequires:  tex(manfnt.tfm)
 BuildRequires:  tth
 
@@ -93,6 +93,9 @@ update-desktop-database %{_datadir}/applications &>/dev/null ||:
 %{_gap_dir}/pkg/%{name}/
 
 %changelog
+* Thu Apr  7 2016 Jerry James <loganjerry@gmail.com> - 4.23-13
+- Rebuild for gap 4.8.3
+
 * Fri Feb 05 2016 Fedora Release Engineering <releng@fedoraproject.org> - 4.23-12
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
