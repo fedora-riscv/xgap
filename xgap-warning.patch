@@ -1,14 +1,14 @@
---- ./src.x11/bitmaps/menusym.bm.orig	2012-04-20 16:00:14.000000000 -0600
-+++ ./src.x11/bitmaps/menusym.bm	2012-04-23 11:24:45.331362194 -0600
+--- ./src.x11/bitmaps/checksym.bm.orig	2016-02-28 04:19:48.000000000 -0700
++++ ./src.x11/bitmaps/checksym.bm	2016-07-30 10:13:16.201848356 -0600
 @@ -1,5 +1,5 @@
- #define menusym_width 12
- #define menusym_height 12
--static unsigned char menusym_bits[] = {
-+static const char menusym_bits[] = {
-    0xfe, 0x03, 0x02, 0x02, 0x02, 0x06, 0x72, 0x06, 0x02, 0x06, 0x72, 0x06,
-    0x02, 0x06, 0x72, 0x06, 0x02, 0x06, 0x02, 0x06, 0xfe, 0x07, 0xf8, 0x07};
---- ./src.x11/bitmaps/emptymk.bm.orig	2012-04-20 16:00:14.000000000 -0600
-+++ ./src.x11/bitmaps/emptymk.bm	2012-04-23 11:24:21.019383597 -0600
+ #define checksym_width 12
+ #define checksym_height 12
+-static char checksym_bits[] = {
++static const char checksym_bits[] = {
+    0x00, 0x00, 0x00, 0x04, 0x00, 0x06, 0x00, 0x03, 0x80, 0x01, 0xc0, 0x00,
+    0x62, 0x00, 0x36, 0x00, 0x1c, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00};
+--- ./src.x11/bitmaps/emptymk.bm.orig	2016-02-28 04:19:48.000000000 -0700
++++ ./src.x11/bitmaps/emptymk.bm	2016-07-30 10:13:16.201848356 -0600
 @@ -1,5 +1,5 @@
  #define emptymk_width 12
  #define emptymk_height 12
@@ -16,8 +16,8 @@
 +static const char emptymk_bits[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
---- ./src.x11/bitmaps/exmark.bm.orig	2012-04-20 16:00:14.000000000 -0600
-+++ ./src.x11/bitmaps/exmark.bm	2012-04-23 11:24:30.299375426 -0600
+--- ./src.x11/bitmaps/exmark.bm.orig	2016-02-28 04:19:48.000000000 -0700
++++ ./src.x11/bitmaps/exmark.bm	2016-07-30 10:13:16.201848356 -0600
 @@ -1,6 +1,6 @@
  #define exmark_width 32
  #define exmark_height 32
@@ -26,17 +26,17 @@
     0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0xc0, 0x01, 0x00,
     0x00, 0x60, 0x03, 0x00, 0x00, 0x60, 0x03, 0x00, 0x00, 0x30, 0x06, 0x00,
     0x00, 0x30, 0x06, 0x00, 0x00, 0x18, 0x0c, 0x00, 0x00, 0x18, 0x0c, 0x00,
---- ./src.x11/bitmaps/checksym.bm.orig	2012-04-20 16:00:14.000000000 -0600
-+++ ./src.x11/bitmaps/checksym.bm	2012-04-23 11:24:11.531391948 -0600
+--- ./src.x11/bitmaps/menusym.bm.orig	2016-02-28 04:19:48.000000000 -0700
++++ ./src.x11/bitmaps/menusym.bm	2016-07-30 10:13:16.190849231 -0600
 @@ -1,5 +1,5 @@
- #define checksym_width 12
- #define checksym_height 12
--static char checksym_bits[] = {
-+static const char checksym_bits[] = {
-    0x00, 0x00, 0x00, 0x04, 0x00, 0x06, 0x00, 0x03, 0x80, 0x01, 0xc0, 0x00,
-    0x62, 0x00, 0x36, 0x00, 0x1c, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00};
---- ./src.x11/bitmaps/return.bm.orig	2012-04-20 16:00:14.000000000 -0600
-+++ ./src.x11/bitmaps/return.bm	2012-04-23 11:24:55.507353236 -0600
+ #define menusym_width 12
+ #define menusym_height 12
+-static unsigned char menusym_bits[] = {
++static const char menusym_bits[] = {
+    0xfe, 0x03, 0x02, 0x02, 0x02, 0x06, 0x72, 0x06, 0x02, 0x06, 0x72, 0x06,
+    0x02, 0x06, 0x72, 0x06, 0x02, 0x06, 0x02, 0x06, 0xfe, 0x07, 0xf8, 0x07};
+--- ./src.x11/bitmaps/return.bm.orig	2016-02-28 04:19:48.000000000 -0700
++++ ./src.x11/bitmaps/return.bm	2016-07-30 10:13:16.201848356 -0600
 @@ -1,5 +1,5 @@
  #define return_width 9
  #define return_height 7
@@ -44,48 +44,27 @@
 +static const char return_bits[] = {
     0x00, 0x00, 0x44, 0x00, 0x42, 0x00, 0x7d, 0x00, 0x02, 0x00, 0x04, 0x00,
     0x00, 0x00};
---- ./src.x11/pty.c.orig	2012-04-20 16:00:14.000000000 -0600
-+++ ./src.x11/pty.c	2012-04-23 11:29:32.250835491 -0600
-@@ -31,6 +31,7 @@
- **    'x'              		the current input line is empty
- **    'z' 			start of 'Exec'
- */
-+#define     _GNU_SOURCE
- #include    "utils.h"
+--- ./src.x11/gapgraph.c.orig	2016-02-28 04:19:48.000000000 -0700
++++ ./src.x11/gapgraph.c	2016-07-30 10:13:16.204848117 -0600
+@@ -121,6 +121,7 @@ static void GapGraphDestroy ( Widget w )
+ }
  
- #include    "gaptext.h"
-@@ -1345,7 +1346,7 @@ int StartGapProcess ( name, argv )
-     String          argv[];
- {
-     Int             j;       /* loop variables                  */
--    char            c[8];    /* buffer for communication        */
-+    char            c[10];   /* buffer for communication        */
-     int             master;  /* pipe to GAP                     */
-     int             n;       /* return value of 'select'        */
-     int             slave;   /* pipe from GAP                   */
---- ./src.x11/xcmds.c.orig	2012-04-20 16:00:14.000000000 -0600
-+++ ./src.x11/xcmds.c	2012-04-23 11:27:59.963190854 -0600
-@@ -1936,6 +1936,8 @@ static Boolean FunDrawText (
  
- *F  FunPlaybackFile( <filename> ) . . . . . . . . .  playback file <filename>
- */
-+extern int PlaybackFile(String);
-+
- static Boolean FunPlaybackFile (
-     TypeArg               * arg )
- {
-@@ -1949,6 +1951,8 @@ static Boolean FunPlaybackFile (
++#if 0
+ /****************************************************************************
  **
- *F  FunResumePlayback() . . . . . . . . . . . . . . . resume playback of file
- */
-+extern int ResumePlayback(void);
-+
- static Boolean FunResumePlayback (
-     TypeArg               * arg )
- {
---- ./src.x11/gaptext.c.orig	2012-04-20 16:00:14.000000000 -0600
-+++ ./src.x11/gaptext.c	2012-04-23 11:26:14.371283810 -0600
-@@ -860,6 +860,9 @@ static XawTextPosition GapSrcScan (
+ *F  GapGraphResize( <w> ) . . . . . . . . . . . . . .  ignore resize requests
+@@ -132,6 +133,7 @@ static void GapGraphResize ( Widget w )
+     gap->core.width  = gap->gap_graphic.width;
+     gap->core.height = gap->gap_graphic.height;
+ }
++#endif
+ 
+ 
+ /****************************************************************************
+--- ./src.x11/gaptext.c.orig	2016-02-28 04:19:48.000000000 -0700
++++ ./src.x11/gaptext.c	2016-07-30 10:13:16.204848117 -0600
+@@ -859,6 +859,9 @@ static XawTextPosition GapSrcScan (
  	case XawstPositions: 
  	    pos += cnt * inc;
  	    break;
@@ -95,21 +74,42 @@
      }
      if ( dir == XawsdLeft )
  	pos++;
---- ./src.x11/gapgraph.c.orig	2012-04-20 16:00:14.000000000 -0600
-+++ ./src.x11/gapgraph.c	2012-04-23 11:23:12.371444028 -0600
-@@ -127,6 +127,7 @@ static void GapGraphDestroy ( w )
- }
+--- ./src.x11/pty.c.orig	2016-02-28 04:19:48.000000000 -0700
++++ ./src.x11/pty.c	2016-07-30 10:13:16.202848277 -0600
+@@ -30,6 +30,7 @@
+ **    'x'              		the current input line is empty
+ **    'z' 			start of 'Exec'
+ */
++#define     _GNU_SOURCE
+ #include    "utils.h"
  
+ #include    "gaptext.h"
+@@ -1344,7 +1345,7 @@ int StartGapProcess ( name, argv )
+     String          argv[];
+ {
+     Int             j;       /* loop variables                  */
+-    char            c[8];    /* buffer for communication        */
++    char            c[10];   /* buffer for communication        */
+     int             master;  /* pipe to GAP                     */
+     int             n;       /* return value of 'select'        */
+     int             slave;   /* pipe from GAP                   */
+--- ./src.x11/xcmds.c.orig	2016-02-28 04:19:48.000000000 -0700
++++ ./src.x11/xcmds.c	2016-07-30 10:13:16.203848197 -0600
+@@ -1935,6 +1935,8 @@ static Boolean FunDrawText (
  
-+#if 0
- /****************************************************************************
+ *F  FunPlaybackFile( <filename> ) . . . . . . . . .  playback file <filename>
+ */
++extern int PlaybackFile(String);
++
+ static Boolean FunPlaybackFile (
+     TypeArg               * arg )
+ {
+@@ -1948,6 +1950,8 @@ static Boolean FunPlaybackFile (
  **
- *F  GapGraphResize( <w> ) . . . . . . . . . . . . . .  ignore resize requests
-@@ -139,6 +140,7 @@ static void GapGraphResize ( w )
-     gap->core.width  = gap->gap_graphic.width;
-     gap->core.height = gap->gap_graphic.height;
- }
-+#endif
- 
- 
- /****************************************************************************
+ *F  FunResumePlayback() . . . . . . . . . . . . . . . resume playback of file
+ */
++extern int ResumePlayback(void);
++
+ static Boolean FunResumePlayback (
+     TypeArg               * arg )
+ {

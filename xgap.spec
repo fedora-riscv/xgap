@@ -1,11 +1,11 @@
 Name:           xgap
-Version:        4.23
-Release:        13%{?dist}
+Version:        4.24
+Release:        1%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
-URL:            http://www-groups.mcs.st-and.ac.uk/~neunhoef/Computer/Software/Gap/%{name}4.html
-Source0:        http://www-groups.mcs.st-and.ac.uk/~neunhoef/Computer/Software/Gap/%{name}4/%{name}-%{version}.tar.gz
+URL:            https://gap-packages.github.io/xgap/
+Source0:        https://github.com/gap-packages/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.gz
 # Created by Jerry James <loganjerry@gmail.com>
 Source1:        %{name}.desktop
 # Created by Paulo César Pereira de Andrade
@@ -29,7 +29,7 @@ Provides:       gap-pkg-xgap = %{version}-%{release}
 A X Windows GUI for GAP.
 
 %prep
-%setup -q -n %{name}
+%setup -q
 %patch0
 
 # Autoloading this package interferes with SAGE (bz 819705).
@@ -47,25 +47,17 @@ make %{?_smp_mflags}
 # Link to main GAP documentation
 ln -s %{_gap_dir}/etc ../../etc
 ln -s %{_gap_dir}/doc ../../doc
+ln -s %{name}-%{version} ../%{name}
 make -C doc manual
-rm -f ../../{doc,etc}
+rm -f ../%{name} ../../{doc,etc}
 
 %install
-mkdir -p %{buildroot}%{_gap_dir}/pkg/%{name}
-cp -a *.g README doc examples htm lib %{buildroot}%{_gap_dir}/pkg/%{name}
-rm -f %{buildroot}%{_gap_dir}/pkg/%{name}/doc/*.{bbl,ind,toc}
-
 mkdir -p %{buildroot}%{_bindir}
-cp -p bin/*/%{name} %{buildroot}%{_bindir}/%{name}.bin
-
-# The xgap.sh generated during build contains paths in the build root
-sed -e "s|@gapdir@|%{_gap_dir}|" \
-    -e "s|^GAP_PRG=.*|GAP_PRG=%{_bindir}/gap|" \
-    -e "s|^XGAP_PRG=.*|XGAP_PRG=%{_bindir}/%{name}.bin|" \
-    -e "s|\$XGAP_DIR/pkg/%{name}/bin/||" \
-    -e "s|\$GAP_DIR/bin/\$GAP_PRG|\$GAP_PRG|" \
-    %{name}.shi > %{buildroot}%{_bindir}/%{name}
-chmod 0755 %{buildroot}%{_bindir}/%{name}
+mkdir -p %{buildroot}%{_gap_dir}/pkg/%{name}
+cp -a *.g README bin doc examples htm lib %{buildroot}%{_gap_dir}/pkg/%{name}
+rm -f %{buildroot}%{_gap_dir}/pkg/%{name}/doc/*.{bbl,ind,tex,toc,Makefile,make_doc}
+mv %{buildroot}%{_gap_dir}/pkg/%{name}/bin/xgap.sh %{buildroot}%{_bindir}/xgap
+rm -f %{buildroot}%{_gap_dir}/pkg/%{name}/bin/*/{Makefile,config*,*.o}
 
 # Install the desktop file
 mkdir -p %{buildroot}%{_datadir}/applications
@@ -83,16 +75,20 @@ update-desktop-database %{_datadir}/applications &>/dev/null ||:
 update-desktop-database %{_datadir}/applications &>/dev/null ||:
 
 %files
-%doc Changelog.*
+%doc CHANGES README
 %docdir %{_gap_dir}/pkg/%{name}/doc
 %docdir %{_gap_dir}/pkg/%{name}/examples
 %docdir %{_gap_dir}/pkg/%{name}/htm
-%{_bindir}/%{name}*
+%{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/X11/app-defaults/XGap
 %{_gap_dir}/pkg/%{name}/
 
 %changelog
+* Sat Jul 30 2016 Jerry James <loganjerry@gmail.com> - 4.24-1
+- New upstream release
+- New URLs
+
 * Thu Apr  7 2016 Jerry James <loganjerry@gmail.com> - 4.23-13
 - Rebuild for gap 4.8.3
 
