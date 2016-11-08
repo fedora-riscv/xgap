@@ -1,5 +1,5 @@
 Name:           xgap
-Version:        4.24
+Version:        4.26
 Release:        1%{?dist}
 Summary:        GUI for GAP
 
@@ -39,7 +39,7 @@ sed -i "/^Autoload/s/true/false/" PackageInfo.g
 sed -i 's,doc/manual,&bib.xml,' doc/manual.tex
 
 %build
-export CFLAGS="$RPM_OPT_FLAGS -D_FILE_OFFSET_BITS=64"
+export CFLAGS="$RPM_OPT_FLAGS -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE"
 export LDFLAGS="$RPM_LD_FLAGS -Wl,--as-needed"
 %configure --with-gaproot=%{_gap_dir}
 make %{?_smp_mflags}
@@ -68,12 +68,6 @@ desktop-file-install --mode=644 --dir=%{buildroot}%{_datadir}/applications \
 mkdir -p %{buildroot}%{_datadir}/X11/app-defaults
 cp -p %{SOURCE2} %{buildroot}%{_datadir}/X11/app-defaults
 
-%post
-update-desktop-database %{_datadir}/applications &>/dev/null ||:
-
-%postun
-update-desktop-database %{_datadir}/applications &>/dev/null ||:
-
 %files
 %doc CHANGES README
 %docdir %{_gap_dir}/pkg/%{name}/doc
@@ -85,6 +79,9 @@ update-desktop-database %{_datadir}/applications &>/dev/null ||:
 %{_gap_dir}/pkg/%{name}/
 
 %changelog
+* Mon Nov  7 2016 Jerry James <loganjerry@gmail.com> - 4.26-1
+- New upstream release
+
 * Sat Jul 30 2016 Jerry James <loganjerry@gmail.com> - 4.24-1
 - New upstream release
 - New URLs
