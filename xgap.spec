@@ -1,6 +1,6 @@
 Name:           xgap
-Version:        4.26
-Release:        5%{?dist}
+Version:        4.27
+Release:        1%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -35,8 +35,9 @@ A X Windows GUI for GAP.
 # Autoloading this package interferes with SAGE (bz 819705).
 sed -i "/^Autoload/s/true/false/" PackageInfo.g 
 
-# Fix link to main GAP bibliography file
-sed -i 's,doc/manual,&bib.xml,' doc/manual.tex
+# Replace the buggy buildman.pe with gap's fixed version
+rm -f doc/buildman.pe
+ln -s %{_gap_dir}/etc/buildman.pe doc/buildman.pe
 
 %build
 export CFLAGS="$RPM_OPT_FLAGS -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE"
@@ -79,6 +80,9 @@ cp -p %{SOURCE2} %{buildroot}%{_datadir}/X11/app-defaults
 %{_gap_dir}/pkg/%{name}/
 
 %changelog
+* Thu Mar 22 2018 Jerry James <loganjerry@gmail.com> - 4.27-1
+- New upstream release
+
 * Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 4.26-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
