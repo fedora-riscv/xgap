@@ -1,6 +1,6 @@
 Name:           xgap
 Version:        4.27
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -80,6 +80,9 @@ cp -p %{SOURCE2} %{buildroot}%{_datadir}/X11/app-defaults
 %{_gap_dir}/pkg/%{name}/
 
 %changelog
+* Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 4.27-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
 * Thu Mar 22 2018 Jerry James <loganjerry@gmail.com> - 4.27-1
 - New upstream release
 
