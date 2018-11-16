@@ -1,5 +1,5 @@
 Name:           xgap
-Version:        4.28
+Version:        4.29
 Release:        1%{?dist}
 Summary:        GUI for GAP
 
@@ -80,6 +80,9 @@ cp -p %{SOURCE2} %{buildroot}%{_datadir}/X11/app-defaults
 %{_gap_dir}/pkg/%{name}/
 
 %changelog
+* Thu Nov 15 2018 Jerry James <loganjerry@gmail.com> - 4.29-1
+- New upstream release
+
 * Mon Sep 24 2018 Jerry James <loganjerry@gmail.com> - 4.28-1
 - New upstream release
 
