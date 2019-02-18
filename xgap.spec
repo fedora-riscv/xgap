@@ -1,6 +1,6 @@
 Name:           xgap
 Version:        4.29
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -13,37 +13,47 @@ Source1:        %{name}.desktop
 Source2:        XGap
 # Sent upstream 9 May 2012.  This patch quiets some compiler warnings.
 Patch0:         %{name}-warning.patch
+# Add missing escapes to buildman.pe
+Patch1:         %{name}-buildman.patch
 
 BuildRequires:  desktop-file-utils
 BuildRequires:  gap-devel
-BuildRequires:  gcc
 BuildRequires:  libXaw-devel
 BuildRequires:  tex(manfnt.tfm)
 BuildRequires:  tth
 
-Requires:       gap-core
+Requires:       gap-core%{?_isa}
 
 Provides:       gap-pkg-xgap = %{version}-%{release}
 
 %description
 A X Windows GUI for GAP.
 
+%package doc
+Summary:        XGap documentation
+BuildArch:      noarch
+Requires:       %{name} = %{version}-%{release}
+Requires:       gap-online-help
+
+%description doc
+This package contains documentation for %{name}.
+
 %prep
-%setup -q
-%patch0
+%autosetup -p0
 
 # Autoloading this package interferes with SAGE (bz 819705).
 sed -i "/^Autoload/s/true/false/" PackageInfo.g 
 
-# Replace the buggy buildman.pe with gap's fixed version
-rm -f doc/buildman.pe
-ln -s %{_gap_dir}/etc/buildman.pe doc/buildman.pe
+# Remove references to obsolete GAP manuals
+sed -i '/prg/d;/ext/d' doc/manual.tex
 
 %build
 export CFLAGS="$RPM_OPT_FLAGS -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE"
-export LDFLAGS="$RPM_LD_FLAGS -Wl,--as-needed"
 %configure --with-gaproot=%{_gap_dir}
 make %{?_smp_mflags}
+
+# Fix a path in the shell wrapper
+sed -i "s,$PWD,\$GAP_DIR/pkg/%{name}-%{version}," bin/xgap.sh
 
 # Link to main GAP documentation
 ln -s %{_gap_dir}/etc ../../etc
@@ -54,11 +64,13 @@ rm -f ../%{name} ../../{doc,etc}
 
 %install
 mkdir -p %{buildroot}%{_bindir}
-mkdir -p %{buildroot}%{_gap_dir}/pkg/%{name}
-cp -a *.g README bin doc examples htm lib %{buildroot}%{_gap_dir}/pkg/%{name}
-rm -f %{buildroot}%{_gap_dir}/pkg/%{name}/doc/*.{bbl,ind,tex,toc,Makefile,make_doc}
-mv %{buildroot}%{_gap_dir}/pkg/%{name}/bin/xgap.sh %{buildroot}%{_bindir}/xgap
-rm -f %{buildroot}%{_gap_dir}/pkg/%{name}/bin/*/{Makefile,config*,*.o}
+mkdir -p %{buildroot}%{_gap_dir}/pkg/%{name}-%{version}
+cp -a *.g bin doc examples htm lib %{buildroot}%{_gap_dir}/pkg/%{name}-%{version}
+rm -f %{buildroot}%{_gap_dir}/pkg/%{name}-%{version}/doc/*.{aux,bbl,blg,brf,idx,ilg,ind,log,out,pnr}
+rm -f %{buildroot}%{_gap_dir}/pkg/%{name}-%{version}/doc/{buildman.*,Makefile,make_doc}
+mv %{buildroot}%{_gap_dir}/pkg/%{name}-%{version}/bin/xgap.sh \
+   %{buildroot}%{_bindir}/xgap
+rm -f %{buildroot}%{_gap_dir}/pkg/%{name}-%{version}/bin/*/{Makefile,config*,*.o}
 
 # Install the desktop file
 mkdir -p %{buildroot}%{_datadir}/applications
@@ -71,15 +83,28 @@ cp -p %{SOURCE2} %{buildroot}%{_datadir}/X11/app-defaults
 
 %files
 %doc CHANGES README
-%docdir %{_gap_dir}/pkg/%{name}/doc
-%docdir %{_gap_dir}/pkg/%{name}/examples
-%docdir %{_gap_dir}/pkg/%{name}/htm
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/X11/app-defaults/XGap
-%{_gap_dir}/pkg/%{name}/
+%{_gap_dir}/pkg/%{name}-%{version}/
+%exclude %{_gap_dir}/pkg/%{name}-%{version}/doc/
+%exclude %{_gap_dir}/pkg/%{name}-%{version}/examples/
+%exclude %{_gap_dir}/pkg/%{name}-%{version}/htm/
+
+%files doc
+%docdir %{_gap_dir}/pkg/%{name}-%{version}/doc/
+%docdir %{_gap_dir}/pkg/%{name}-%{version}/examples/
+%docdir %{_gap_dir}/pkg/%{name}-%{version}/htm/
+%{_gap_dir}/pkg/%{name}-%{version}/doc/
+%{_gap_dir}/pkg/%{name}-%{version}/examples/
+%{_gap_dir}/pkg/%{name}-%{version}/htm/
 
 %changelog
+* Mon Feb  4 2019 Jerry James <loganjerry@gmail.com> - 4.29-3
+- Rebuild for gap 4.10.0
+- Add -buildman patch
+- Add -doc subpackage
+
 * Sun Feb 03 2019 Fedora Release Engineering <releng@fedoraproject.org> - 4.29-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
