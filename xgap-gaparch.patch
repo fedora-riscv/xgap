@@ -1,0 +1,11 @@
+--- Makefile.in.orig	2019-04-15 16:27:54.000000000 -0600
++++ Makefile.in	2019-04-24 10:38:45.822396860 -0600
+@@ -29,7 +29,7 @@
+ SHELL=/bin/sh
+ CC=@CC@
+ @SET_MAKE@
+-GAParch=@target@-@CC@
++GAParch=@GAPARCH@
+ 
+ default: config compile
+ 

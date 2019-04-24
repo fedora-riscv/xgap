@@ -1,6 +1,6 @@
 Name:           xgap
-Version:        4.29
-Release:        3%{?dist}
+Version:        4.30
+Release:        1%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -15,6 +15,8 @@ Source2:        XGap
 Patch0:         %{name}-warning.patch
 # Add missing escapes to buildman.pe
 Patch1:         %{name}-buildman.patch
+# Fix computation of GAParch
+Patch2:         %{name}-gaparch.patch
 
 BuildRequires:  desktop-file-utils
 BuildRequires:  gap-devel
@@ -100,6 +102,9 @@ cp -p %{SOURCE2} %{buildroot}%{_datadir}/X11/app-defaults
 %{_gap_dir}/pkg/%{name}-%{version}/htm/
 
 %changelog
+* Wed Apr 24 2019 Jerry James <loganjerry@gmail.com> - 4.30-1
+- New upstream release
+
 * Mon Feb  4 2019 Jerry James <loganjerry@gmail.com> - 4.29-3
 - Rebuild for gap 4.10.0
 - Add -buildman patch
