@@ -1,6 +1,6 @@
 Name:           xgap
 Version:        4.30
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -24,7 +24,7 @@ BuildRequires:  libXaw-devel
 BuildRequires:  tex(manfnt.tfm)
 BuildRequires:  tth
 
-Requires:       gap-core%{?_isa}
+Requires:       gap%{?_isa}
 
 Provides:       gap-pkg-xgap = %{version}-%{release}
 
@@ -102,6 +102,9 @@ cp -p %{SOURCE2} %{buildroot}%{_datadir}/X11/app-defaults
 %{_gap_dir}/pkg/%{name}-%{version}/htm/
 
 %changelog
+* Tue Jun 25 2019 Jerry James <loganjerry@gmail.com> - 4.30-2
+- Require gap, not gap-core, so the binary can be invoked and the icon be seen
+
 * Wed Apr 24 2019 Jerry James <loganjerry@gmail.com> - 4.30-1
 - New upstream release
 
