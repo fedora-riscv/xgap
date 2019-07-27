@@ -1,6 +1,6 @@
 Name:           xgap
 Version:        4.30
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -102,6 +102,9 @@ cp -p %{SOURCE2} %{buildroot}%{_datadir}/X11/app-defaults
 %{_gap_dir}/pkg/%{name}-%{version}/htm/
 
 %changelog
+* Sat Jul 27 2019 Fedora Release Engineering <releng@fedoraproject.org> - 4.30-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+
 * Tue Jun 25 2019 Jerry James <loganjerry@gmail.com> - 4.30-2
 - Require gap, not gap-core, so the binary can be invoked and the icon be seen
 
