@@ -1,6 +1,6 @@
 Name:           xgap
 Version:        4.30
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -20,7 +20,8 @@ Patch2:         %{name}-gaparch.patch
 
 BuildRequires:  desktop-file-utils
 BuildRequires:  gap-devel
-BuildRequires:  libXaw-devel
+BuildRequires:  gcc
+BuildRequires:  pkgconfig(xaw7)
 BuildRequires:  tex(manfnt.tfm)
 BuildRequires:  tth
 
@@ -102,6 +103,9 @@ cp -p %{SOURCE2} %{buildroot}%{_datadir}/X11/app-defaults
 %{_gap_dir}/pkg/%{name}-%{version}/htm/
 
 %changelog
+* Thu Mar 12 2020 Jerry James <loganjerry@gmail.com> - 4.30-5
+- Rebuild for gap 4.11.0
+
 * Fri Jan 31 2020 Fedora Release Engineering <releng@fedoraproject.org> - 4.30-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
