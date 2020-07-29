@@ -1,6 +1,6 @@
 Name:           xgap
 Version:        4.30
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -103,6 +103,9 @@ cp -p %{SOURCE2} %{buildroot}%{_datadir}/X11/app-defaults
 %{_gap_dir}/pkg/%{name}-%{version}/htm/
 
 %changelog
+* Wed Jul 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 4.30-6
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
 * Thu Mar 12 2020 Jerry James <loganjerry@gmail.com> - 4.30-5
 - Rebuild for gap 4.11.0
 
