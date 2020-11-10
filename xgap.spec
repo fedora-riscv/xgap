@@ -21,6 +21,7 @@ Patch2:         %{name}-gaparch.patch
 BuildRequires:  desktop-file-utils
 BuildRequires:  gap-devel
 BuildRequires:  gcc
+BuildRequires:  make
 BuildRequires:  pkgconfig(xaw7)
 BuildRequires:  tex(manfnt.tfm)
 BuildRequires:  tth
@@ -53,7 +54,7 @@ sed -i '/prg/d;/ext/d' doc/manual.tex
 %build
 export CFLAGS="$RPM_OPT_FLAGS -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE"
 %configure --with-gaproot=%{_gap_dir}
-make %{?_smp_mflags}
+%make_build
 
 # Fix a path in the shell wrapper
 sed -i "s,$PWD,\$GAP_DIR/pkg/%{name}-%{version}," bin/xgap.sh
