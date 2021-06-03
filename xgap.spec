@@ -1,6 +1,6 @@
 Name:           xgap
 Version:        4.30
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -23,7 +23,6 @@ BuildRequires:  gap-devel
 BuildRequires:  gcc
 BuildRequires:  make
 BuildRequires:  pkgconfig(xaw7)
-BuildRequires:  tex(manfnt.tfm)
 BuildRequires:  tth
 
 Requires:       gap%{?_isa}
@@ -104,6 +103,9 @@ cp -p %{SOURCE2} %{buildroot}%{_datadir}/X11/app-defaults
 %{_gap_dir}/pkg/%{name}-%{version}/htm/
 
 %changelog
+* Thu Jun  3 2021 Jerry James <loganjerry@gmail.com> - 4.30-8
+- Remove unnecessary BR on tex(manfnt.tfm)
+
 * Thu Jan 28 2021 Fedora Release Engineering <releng@fedoraproject.org> - 4.30-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
