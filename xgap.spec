@@ -1,6 +1,6 @@
 Name:           xgap
 Version:        4.30
-Release:        8%{?dist}
+Release:        9%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -103,6 +103,9 @@ cp -p %{SOURCE2} %{buildroot}%{_datadir}/X11/app-defaults
 %{_gap_dir}/pkg/%{name}-%{version}/htm/
 
 %changelog
+* Fri Jul 23 2021 Fedora Release Engineering <releng@fedoraproject.org> - 4.30-9
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
+
 * Thu Jun  3 2021 Jerry James <loganjerry@gmail.com> - 4.30-8
 - Remove unnecessary BR on tex(manfnt.tfm)
 
