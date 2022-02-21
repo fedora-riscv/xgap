@@ -1,5 +1,5 @@
---- src.x11/bitmaps/checksym.bm.orig	2019-04-15 16:27:54.000000000 -0600
-+++ src.x11/bitmaps/checksym.bm	2019-04-24 10:37:25.662595279 -0600
+--- src.x11/bitmaps/checksym.bm.orig	2022-02-17 06:50:48.000000000 -0700
++++ src.x11/bitmaps/checksym.bm	2022-02-21 09:29:39.265821138 -0700
 @@ -1,5 +1,5 @@
  #define checksym_width 12
  #define checksym_height 12
@@ -7,8 +7,8 @@
 +static const char checksym_bits[] = {
     0x00, 0x00, 0x00, 0x04, 0x00, 0x06, 0x00, 0x03, 0x80, 0x01, 0xc0, 0x00,
     0x62, 0x00, 0x36, 0x00, 0x1c, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00};
---- src.x11/bitmaps/emptymk.bm.orig	2019-04-15 16:27:54.000000000 -0600
-+++ src.x11/bitmaps/emptymk.bm	2019-04-24 10:37:25.674595249 -0600
+--- src.x11/bitmaps/emptymk.bm.orig	2022-02-17 06:50:48.000000000 -0700
++++ src.x11/bitmaps/emptymk.bm	2022-02-21 09:29:39.265821138 -0700
 @@ -1,5 +1,5 @@
  #define emptymk_width 12
  #define emptymk_height 12
@@ -16,8 +16,8 @@
 +static const char emptymk_bits[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
---- src.x11/bitmaps/exmark.bm.orig	2019-04-15 16:27:54.000000000 -0600
-+++ src.x11/bitmaps/exmark.bm	2019-04-24 10:37:25.675595247 -0600
+--- src.x11/bitmaps/exmark.bm.orig	2022-02-17 06:50:48.000000000 -0700
++++ src.x11/bitmaps/exmark.bm	2022-02-21 09:29:39.265821138 -0700
 @@ -1,6 +1,6 @@
  #define exmark_width 32
  #define exmark_height 32
@@ -26,8 +26,8 @@
     0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0xc0, 0x01, 0x00,
     0x00, 0x60, 0x03, 0x00, 0x00, 0x60, 0x03, 0x00, 0x00, 0x30, 0x06, 0x00,
     0x00, 0x30, 0x06, 0x00, 0x00, 0x18, 0x0c, 0x00, 0x00, 0x18, 0x0c, 0x00,
---- src.x11/bitmaps/menusym.bm.orig	2019-04-15 16:27:54.000000000 -0600
-+++ src.x11/bitmaps/menusym.bm	2019-04-24 10:37:25.675595247 -0600
+--- src.x11/bitmaps/menusym.bm.orig	2022-02-17 06:50:48.000000000 -0700
++++ src.x11/bitmaps/menusym.bm	2022-02-21 09:29:39.265821138 -0700
 @@ -1,5 +1,5 @@
  #define menusym_width 12
  #define menusym_height 12
@@ -35,8 +35,8 @@
 +static const char menusym_bits[] = {
     0xfe, 0x03, 0x02, 0x02, 0x02, 0x06, 0x72, 0x06, 0x02, 0x06, 0x72, 0x06,
     0x02, 0x06, 0x72, 0x06, 0x02, 0x06, 0x02, 0x06, 0xfe, 0x07, 0xf8, 0x07};
---- src.x11/bitmaps/return.bm.orig	2019-04-15 16:27:54.000000000 -0600
-+++ src.x11/bitmaps/return.bm	2019-04-24 10:37:25.675595247 -0600
+--- src.x11/bitmaps/return.bm.orig	2022-02-17 06:50:48.000000000 -0700
++++ src.x11/bitmaps/return.bm	2022-02-21 09:29:39.266821139 -0700
 @@ -1,5 +1,5 @@
  #define return_width 9
  #define return_height 7
@@ -44,8 +44,8 @@
 +static const char return_bits[] = {
     0x00, 0x00, 0x44, 0x00, 0x42, 0x00, 0x7d, 0x00, 0x02, 0x00, 0x04, 0x00,
     0x00, 0x00};
---- src.x11/gapgraph.c.orig	2019-04-15 16:27:54.000000000 -0600
-+++ src.x11/gapgraph.c	2019-04-24 10:37:25.676595245 -0600
+--- src.x11/gapgraph.c.orig	2022-02-17 06:50:48.000000000 -0700
++++ src.x11/gapgraph.c	2022-02-21 09:29:39.266821139 -0700
 @@ -121,6 +121,7 @@ static void GapGraphDestroy ( Widget w )
  }
  
@@ -62,14 +62,3 @@
  
  
  /****************************************************************************
---- src.x11/pty.c.orig	2019-04-15 16:27:54.000000000 -0600
-+++ src.x11/pty.c	2019-04-24 10:37:25.677595242 -0600
-@@ -1295,7 +1295,7 @@ int StartGapProcess ( name, argv )
-     String          argv[];
- {
-     Int             j;       /* loop variables                  */
--    char            c[8];    /* buffer for communication        */
-+    char            c[10];   /* buffer for communication        */
-     int             master;  /* pipe to GAP                     */
-     int             n;       /* return value of 'select'        */
-     int             slave;   /* pipe from GAP                   */

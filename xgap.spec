@@ -1,6 +1,6 @@
 Name:           xgap
-Version:        4.30
-Release:        10%{?dist}
+Version:        4.31
+Release:        1%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -13,10 +13,8 @@ Source1:        %{name}.desktop
 Source2:        XGap
 # Sent upstream 9 May 2012.  This patch quiets some compiler warnings.
 Patch0:         %{name}-warning.patch
-# Add missing escapes to buildman.pe
-Patch1:         %{name}-buildman.patch
 # Fix computation of GAParch
-Patch2:         %{name}-gaparch.patch
+Patch1:         %{name}-gaparch.patch
 
 BuildRequires:  desktop-file-utils
 BuildRequires:  gap-devel
@@ -47,11 +45,11 @@ This package contains documentation for %{name}.
 # Autoloading this package interferes with SAGE (bz 819705).
 sed -i "/^Autoload/s/true/false/" PackageInfo.g 
 
-# Remove references to obsolete GAP manuals
-sed -i '/prg/d;/ext/d' doc/manual.tex
+# Remove references to an obsolete GAP manual
+sed -i '/prg/d' doc/manual.tex
 
 %build
-export CFLAGS="$RPM_OPT_FLAGS -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE"
+export CFLAGS="%{build_cflags} -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE"
 %configure --with-gaproot=%{_gap_dir}
 %make_build
 
@@ -103,6 +101,10 @@ cp -p %{SOURCE2} %{buildroot}%{_datadir}/X11/app-defaults
 %{_gap_dir}/pkg/%{name}-%{version}/htm/
 
 %changelog
+* Mon Feb 21 2022 Jerry James <loganjerry@gmail.com> - 4.31-1
+- Version 4.31
+- Drop upstreamed -buildman patch
+
 * Sat Jan 22 2022 Fedora Release Engineering <releng@fedoraproject.org> - 4.30-10
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
