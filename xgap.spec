@@ -1,6 +1,6 @@
 Name:           xgap
 Version:        4.31
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -101,6 +101,9 @@ cp -p %{SOURCE2} %{buildroot}%{_datadir}/X11/app-defaults
 %{_gap_dir}/pkg/%{name}-%{version}/htm/
 
 %changelog
+* Sat Jul 23 2022 Fedora Release Engineering <releng@fedoraproject.org> - 4.31-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild
+
 * Mon Feb 21 2022 Jerry James <loganjerry@gmail.com> - 4.31-1
 - Version 4.31
 - Drop upstreamed -buildman patch
