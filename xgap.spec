@@ -1,6 +1,6 @@
 Name:           xgap
 Version:        4.31
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        GUI for GAP
 
 License:        GPLv2+
@@ -82,6 +82,13 @@ desktop-file-install --mode=644 --dir=%{buildroot}%{_datadir}/applications \
 mkdir -p %{buildroot}%{_datadir}/X11/app-defaults
 cp -p %{SOURCE2} %{buildroot}%{_datadir}/X11/app-defaults
 
+# This doesn't work, because tst/testall.g invokes a function that is defined
+# inside one of the test files.  TODO: ask upstream how the tests are supposed
+# to be invoked.
+#
+#%check
+#gap -l "%%{buildroot}%%{_gap_dir};%%{_gap_dir}" < tst/testall.g
+
 %files
 %doc CHANGES README
 %{_bindir}/%{name}
@@ -101,6 +108,9 @@ cp -p %{SOURCE2} %{buildroot}%{_datadir}/X11/app-defaults
 %{_gap_dir}/pkg/%{name}-%{version}/htm/
 
 %changelog
+* Mon Jul 25 2022 Jerry James <loganjerry@gmail.com> - 4.31-3
+- Rebuild due to changed binary dir name on s390x
+
 * Sat Jul 23 2022 Fedora Release Engineering <releng@fedoraproject.org> - 4.31-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild
 
