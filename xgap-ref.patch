@@ -1,0 +1,23 @@
+--- doc/manual.tex.orig	2022-02-17 06:50:57.000000000 -0700
++++ doc/manual.tex	2022-09-07 21:10:27.708197131 -0600
+@@ -18,8 +18,8 @@
+ %%
+ \BeginningOfBook{xgap}
+ \UseReferences{../../../doc/tut}
+-\UseReferences{../../../doc/prg}
+ \UseReferences{../../../doc/ref}
++\UseReferences{../../smallgrp/doc}
+ %
+ %
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--- doc/sglatsys.tex.orig	2022-02-17 06:50:57.000000000 -0700
++++ doc/sglatsys.tex	2022-09-07 21:17:12.549273377 -0600
+@@ -640,7 +640,7 @@ reference manual.
+ \>`Isomorphism'{Isomorphism}@{`Isomorphism'}
+ 
+ computes and displays  the isomorphism type of  $u$.  This will only work
+-if the size of $u$ is small.  See "ref:IdGroup"  in the {\GAP}
++if the size of $u$ is small.  See "smallgrp:IdGroup" in the smallgrp
+ reference manual for details.
+ 
+ \bigskip%
