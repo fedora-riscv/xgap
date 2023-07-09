@@ -1,12 +1,12 @@
 Name:           xgap
 Version:        4.31
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        GUI for GAP
 
 # The project as a whole is GPL-2.0-or-later.
 # src.x11/selfile.{c,h} is HPND.
 License:        GPL-2.0-or-later AND HPND
-ExclusiveArch:  aarch64 ppc64le s390x x86_64
+ExclusiveArch:  aarch64 ppc64le s390x x86_64 riscv64
 URL:            https://gap-packages.github.io/xgap/
 Source0:        https://github.com/gap-packages/xgap/releases/download/v%{version}/%{name}-%{version}.tar.gz
 # Created by Jerry James <loganjerry@gmail.com>
@@ -118,6 +118,9 @@ mv %{buildroot}%{gap_archdir}/pkg/%{name}/tst/xgap_test.g.orig \
 %{gap_archdir}/pkg/%{name}/htm/
 
 %changelog
+* Sun Jul 9 2023 Milkice Qiu <milkice@milkice.me> - 4.31-8
+- Add arch for riscv64
+
 * Sat Jan 21 2023 Fedora Release Engineering <releng@fedoraproject.org> - 4.31-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_38_Mass_Rebuild
 
